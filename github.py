@@ -402,9 +402,9 @@ class Github(object):
                     continue
                 else:
                     file_ = _
-                    break
+                    return file_
 
-        return file_
+
 
     def upload_file_to_repo_forsha(self, fiel, commit_message):
         url = f"https://api.github.com/repos/{self.username}/{self.target_repo_name}/contents/{fiel.get('path')}"
@@ -429,9 +429,9 @@ class Github(object):
 
 def upload_random_file_to_repo(token, commit_message):
     g = Github(token=token, proxy=None)
-    # keywords = open('keywords.txt', encoding='utf-8').read().splitlines()
+    keyword = str(random.choice(open('keywords.txt', encoding='utf-8').read().splitlines()))
     # print(keywords)
-    file_ = g.get_random_file_("query")
+    file_ = g.get_random_file_(keyword)
     g.upload_file_to_repo_forsha(file_, commit_message)
 
 
